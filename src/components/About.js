@@ -6,7 +6,7 @@ const About = () => {
       <div id="about" className="container-fluid">
         <div className="row">
           <div className="col-sm-7">
-            <h2 className="icons">About Influenzos</h2>
+            <h2 className="icons">About INFLUENZOS</h2>
             <br />
             <h4>What is Crowdfunding?</h4>
             <p class="text-justify">
