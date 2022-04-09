@@ -1,6 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import {
+  connectWallet,
+  getActiveAccount,
+  disconnectWallet,
+} from "../utils/wallet";
 
 const Navbar = () => {
+    const [wallet, setWallet] = useState(null);
+
+  const handleConnectWallet = async () => {
+    const { wallet } = await connectWallet();
+    setWallet(wallet);
+  };
+  const handleDisconnectWallet = async () => {
+    const { wallet } = await disconnectWallet();
+    setWallet(wallet);
+  };
+
+  useEffect(() => {
+    const func = async () => {
+      const account = await getActiveAccount();
+      if (account) {
+        setWallet(account.address);
+      }
+    };
+    func();
+  }, []);
     return (
         <nav className="navbar navbar-default navbar-fixed-top">
             <div className="container">
@@ -20,15 +45,23 @@ const Navbar = () => {
                         <li><a href="#pricing">CAMPAIGN</a></li>
                         <li><a href="#contact">CONTACT</a></li>
                         <li>
-                            <button className="btn btn-default btn-md signin">
-                                <p className="text-dark vertical-center">SIGN IN</p>
-                            </button>
+                        <button
+                onClick={wallet ? handleDisconnectWallet : handleConnectWallet}
+                className="btn btn-default btn-md signin"
+              >
+                <p className="text-dark vertical-center">
+                  {" "}
+                  {wallet ? "Sign Out" : "Sign In"}
+                </p>
+              </button>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     );
-};
+}
+ 
 
 export default Navbar;
+    
