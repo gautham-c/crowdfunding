@@ -30,8 +30,9 @@ const About = () => {
           </div>
           <div className="col-sm-5">
             <img
-              className="aboutImage"
-              src={require("../assets/about.gif")}
+              className="aboutImage mw-50"
+              src={require("../assets/about.png")}
+              alt="about"
               height="300em"
               width="500em"></img>
           </div>
